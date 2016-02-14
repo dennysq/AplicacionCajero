@@ -5,6 +5,9 @@
  */
 package com.teamj.distribuidas.aplicacioncajero;
 
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Marco Antonio
@@ -29,7 +32,7 @@ public class RealizarRegistro extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtMonto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -42,10 +45,10 @@ public class RealizarRegistro extends javax.swing.JFrame {
 
         jLabel2.setText("MONTO:");
 
-        jTextField1.setText("jTextField1");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtMonto.setText("jTextField1");
+        txtMonto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtMontoActionPerformed(evt);
             }
         });
 
@@ -59,8 +62,18 @@ public class RealizarRegistro extends javax.swing.JFrame {
         });
 
         jRadioButton2.setText("Retiro");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Aceptar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +102,7 @@ public class RealizarRegistro extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jRadioButton2)
                                     .addComponent(jRadioButton1)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtMonto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
@@ -104,7 +117,7 @@ public class RealizarRegistro extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -122,16 +135,48 @@ public class RealizarRegistro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
+             // TODO add your handling code here:
+     
+             
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtMontoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        String tipo;
+        if(jRadioButton1.isSelected())
+        {
+            tipo="DE";
+        } else
+        {
+            tipo="RE";
+        }
+        
+        if (!txtMonto.getText().isEmpty()) {
+        DetalleCuenta b = new DetalleCuenta();    
+        Movimiento movimiento = new Movimiento();
+        movimiento = Communication.registrarMovimeinto(b.lblCedula.getText(), b.lblCuenta.getText(), txtMonto.getText(), tipo, new Date());
+        System.out.print(movimiento);
+        JOptionPane.showMessageDialog(null, "Transaccion realizada");
+        //DefaultTableModel modelo = (DefaultTableModel) tblpro.getModel();
+        //producto = new Producto("20", "7", "88888", "hkjhk");
+        // modelo.addRow(new String[]{producto.getId(),producto.getNombre(),txtcantidad.getText(),Double.parseDouble(producto.getPrecio())*Double.parseDouble(txtcantidad.getText())});   
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese la cantidad primero");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,6 +221,6 @@ public class RealizarRegistro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtMonto;
     // End of variables declaration//GEN-END:variables
 }

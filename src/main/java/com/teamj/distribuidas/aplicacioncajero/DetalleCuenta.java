@@ -18,6 +18,7 @@ public class DetalleCuenta extends javax.swing.JFrame {
      */
     public DetalleCuenta() {
         initComponents();
+       
     }
 
     /**
@@ -42,11 +43,11 @@ public class DetalleCuenta extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        lblCedula = new javax.swing.JLabel();
+        lblCliente = new javax.swing.JLabel();
+        lblCuenta = new javax.swing.JLabel();
+        lblTipo = new javax.swing.JLabel();
+        lblSaldo = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -99,15 +100,16 @@ public class DetalleCuenta extends javax.swing.JFrame {
 
         jLabel7.setText("SALDO ACTUAL:");
 
-        jLabel8.setText("jLabel8");
+        lblCedula.setText("jLabel8");
+        lblCedula.setName("lblCedula"); // NOI18N
 
-        jLabel9.setText("jLabel9");
+        lblCliente.setText("jLabel9");
 
-        jLabel10.setText("jLabel10");
+        lblCuenta.setText("jLabel10");
 
-        jLabel11.setText("jLabel11");
+        lblTipo.setText("jLabel11");
 
-        jLabel13.setText("jLabel11");
+        lblSaldo.setText("jLabel11");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,7 +125,7 @@ public class DetalleCuenta extends javax.swing.JFrame {
                                 .addGap(155, 155, 155)
                                 .addComponent(jLabel6)
                                 .addGap(59, 59, 59)
-                                .addComponent(jLabel11))
+                                .addComponent(lblTipo))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
@@ -136,8 +138,8 @@ public class DetalleCuenta extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(104, 104, 104)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9))
+                                    .addComponent(lblCedula)
+                                    .addComponent(lblCliente))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
@@ -147,9 +149,9 @@ public class DetalleCuenta extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel7)
                                 .addGap(39, 39, 39)
-                                .addComponent(jLabel13)))
+                                .addComponent(lblSaldo)))
                         .addGap(40, 40, 40)
-                        .addComponent(jLabel10)
+                        .addComponent(lblCuenta)
                         .addGap(77, 77, 77))))
         );
         layout.setVerticalGroup(
@@ -161,18 +163,18 @@ public class DetalleCuenta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel10))
+                    .addComponent(lblCedula)
+                    .addComponent(lblCuenta))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel11))
+                    .addComponent(lblCliente)
+                    .addComponent(lblTipo))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel13))
+                    .addComponent(lblSaldo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -182,11 +184,11 @@ public class DetalleCuenta extends javax.swing.JFrame {
                 .addGap(52, 52, 52))
         );
 
-        jLabel8.getAccessibleContext().setAccessibleName("lblCedula");
-        jLabel9.getAccessibleContext().setAccessibleName("lblCliente");
-        jLabel10.getAccessibleContext().setAccessibleName("lblCuenta");
-        jLabel11.getAccessibleContext().setAccessibleName("lblTipo");
-        jLabel13.getAccessibleContext().setAccessibleName("lblSaldo");
+        lblCedula.getAccessibleContext().setAccessibleName("lblCedula");
+        lblCliente.getAccessibleContext().setAccessibleName("lblCliente");
+        lblCuenta.getAccessibleContext().setAccessibleName("lblCuenta");
+        lblTipo.getAccessibleContext().setAccessibleName("lblTipo");
+        lblSaldo.getAccessibleContext().setAccessibleName("lblSaldo");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -236,21 +238,21 @@ public class DetalleCuenta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btnbuscar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    public javax.swing.JTable jTable2;
+    public javax.swing.JLabel lblCedula;
+    public javax.swing.JLabel lblCliente;
+    public javax.swing.JLabel lblCuenta;
+    public javax.swing.JLabel lblSaldo;
+    public javax.swing.JLabel lblTipo;
     // End of variables declaration//GEN-END:variables
 }

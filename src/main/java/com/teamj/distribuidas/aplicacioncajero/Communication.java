@@ -50,61 +50,57 @@ public class Communication {
      * @return nulo si no se ha encontrado la empresa en el sistema caso
      * contratio trae el objeto empresa
      */
-    public static Empresa retrieveEmpresa(String usuario, String password) {
+    public static Empleado retrieveEmpleado(String usuario, String password) {
         if (usuario != null && password != null) {
             AppClient appClient = new AppClient();
-            AutenticacionEmpresaRQ aerq = new AutenticacionEmpresaRQ();
+            AutenticacionRQ aerq = new AutenticacionRQ();
 
-            aerq.setPassword(password);
-            aerq.setUserId(usuario);
+            aerq.setClave(password);
+            aerq.setUsuario(usuario);
 
-            MensajeRQ mensajeRQ = new MensajeRQ("dennys", Mensaje.ID_MENSAJE_AUTENTICACIONCLIENTE);
+            MensajeRQ mensajeRQ = new MensajeRQ("marco", Mensaje.ID_MENSAJE_AUTENTICACION);
             mensajeRQ.setCuerpo(aerq);
             MensajeRS mensajeRS = appClient.sendRequest(mensajeRQ);
             if (mensajeRS != null) {
-                AutenticacionEmpresaRS aers = (AutenticacionEmpresaRS) mensajeRS.getCuerpo();
+                AutenticacionRS aers = (AutenticacionRS) mensajeRS.getCuerpo();
                 if (aers.getResultado().equals("1")) {
-                    System.out.println("" + aers.getEmpresa());
-                    return aers.getEmpresa();
+                    System.out.println("" + aers.getEmpleado());
+                    return aers.getEmpleado();
                 }
             }
         }
         return null;
     }
-    
-    public static boolean insertcliente(String id, String nombre, String telefono, String direccion)
-    {
-                if(nombre!=null && telefono!=null && direccion!=null && id!=null && id.length()>9 && id.length()<=15)
-                {
-                    AppClient appClient = new AppClient();
-                    IngresoClienteRQ ing= new IngresoClienteRQ();
-                    ing.setCliente(new Cliente(id, nombre, telefono, direccion));
-                    MensajeRQ mensajeRQ =new MensajeRQ("INGRESOCLI", Mensaje.ID_MENSAJE_INGRESOCLIENTE);
-                    mensajeRQ.setCuerpo(ing);
-                    MensajeRS mensajeRS = appClient.sendRequest(mensajeRQ);
-                    IngresoClienteRS ingrs=(IngresoClienteRS)mensajeRS.getCuerpo();
-                    if (ingrs.getResultado().equals("1")) {
-                      return true;
-                    }
-                      else{
-                              return false;
-                          }
-            }
-                return false;
-    }
-    
-   
 
-    public static Cliente buscarcliente(String datos) {
+    public static Cuenta buscarCuenta(String datos) {
         if (datos != null && datos.length() == 10) {
-            AppClient appClient = new AppClient();
-            ConsultaClienteRQ cliRQ = new ConsultaClienteRQ();
+            AppCajero appCajero = new AppCajero();
+            CuentaRQ cueRQ = new CuentaRQ();
+            cueRQ.setIdentificacion(datos);
+
+            MensajeRQ mensajeRQ = new MensajeRQ("CONSULTACU", Mensaje.ID_MENSAJE_CONSULTACUENTA);
+            mensajeRQ.setCuerpo(cueRQ);
+            MensajeRS mensajeRS = appCajero.sendRequest(mensajeRQ);
+            CuentaRS cueRS = (CuentaRS) mensajeRS.getCuerpo();
+            if (cueRS.getResultado().equals("1")) {
+                System.out.println("" + cueRS.getCliente());
+                return cueRS.getCuenta();
+            }
+
+        }
+        return null;
+    }
+
+    public static Cliente buscarCliente(String datos) {
+        if (datos != null && datos.length() == 10) {
+            AppCajero appCajero = new AppCajero();
+            ConsultarClienteRQ cliRQ = new ConsultarClienteRQ();
             cliRQ.setIdentificacion(datos);
 
             MensajeRQ mensajeRQ = new MensajeRQ("CONSULTACL", Mensaje.ID_MENSAJE_CONSULTACLIENTE);
             mensajeRQ.setCuerpo(cliRQ);
-            MensajeRS mensajeRS = appClient.sendRequest(mensajeRQ);
-            ConsultaClienteRS cliRS = (ConsultaClienteRS) mensajeRS.getCuerpo();
+            MensajeRS mensajeRS = appCajero.sendRequest(mensajeRQ);
+            ConsultarClienteRS cliRS = (ConsultarClienteRS) mensajeRS.getCuerpo();
             if (cliRS.getResultado().equals("1")) {
                 System.out.println("" + cliRS.getCliente());
                 return cliRS.getCliente();
@@ -114,70 +110,68 @@ public class Communication {
         return null;
     }
 
-    public static Producto retrieveProducto(String idProducto) {
+    public static Movimiento buscarMovimiento(String datos) {
+        if (datos != null && datos.length() == 10) {
+            AppCajero appCajero = new AppCajero();
+            ConsultarMovimientoRQ movRQ = new ConsultarMovimientoRQ();
+            movRQ.setIdentificacion(datos);
 
-        if (idProducto != null) {
-            AppClient appClient = new AppClient();
-            ConsultaProductoRQ cprq = new ConsultaProductoRQ();
-
-            cprq.setIdProducto(idProducto);
-
-            MensajeRQ mensajeRQ = new MensajeRQ("ale", Mensaje.ID_MENSAJE_CONSULTAPRODUCTO);
-            mensajeRQ.setCuerpo(cprq);
-            MensajeRS mensajeRS = appClient.sendRequest(mensajeRQ);
-            ConsultaProductoRS cprs = (ConsultaProductoRS) mensajeRS.getCuerpo();
-            if (cprs.getResultado().equals("1")) {
-                System.out.println("" + cprs.getProducto());
-                return cprs.getProducto();
+            MensajeRQ mensajeRQ = new MensajeRQ("CONSULTAMO", Mensaje.ID_MENSAJE_CONSULTAMOVIMIENTO);
+            mensajeRQ.setCuerpo(movRQ);
+            MensajeRS mensajeRS = appCajero.sendRequest(mensajeRQ);
+            ConsultarMovimientoRS movRS = (ConsultarMovimientoRS) mensajeRS.getCuerpo();
+            if (movRS.getResultado().equals("1")) {
+                System.out.println("" + movRS.getMovimiento());
+                return movRS.getMovimiento();
             }
+
         }
         return null;
     }
 
-    public static String registrarFactura(String idFactura, String identificacionCliente, Date fecha, float totalFactura, List<DetalleFacturaAppRQ> detalles) {
+    public static String registrarMovimeinto(String cedula, String cuenta, String monto, String tipo, Date fecha) {
 
-        if (identificacionCliente != null && fecha != null && detalles != null && idFactura != null) {
-            IngresoFacturaRQ ingresoFacturaRQ = new IngresoFacturaRQ();
-            AppClient appClient = new AppClient();
-            ingresoFacturaRQ.setDetalles(detalles);
-            ingresoFacturaRQ.setIdFactura(idFactura);
-            ingresoFacturaRQ.setIdentificacion(identificacionCliente);
-            ingresoFacturaRQ.setNumeroDetalles(String.valueOf(detalles.size()));
-            SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
-            ingresoFacturaRQ.setFecha(sdf.format(fecha));
-            BigDecimal total = new BigDecimal(totalFactura).setScale(2, RoundingMode.HALF_UP);
-            ingresoFacturaRQ.setTotal(total.toPlainString());
-            MensajeRQ mensajeRQ = new MensajeRQ(NetUtil.getLocalIPAddress(), Mensaje.ID_MENSAJE_INGRESOFACTURA);
-            mensajeRQ.setCuerpo(ingresoFacturaRQ);
-            MensajeRS mensajeRS = appClient.sendRequest(mensajeRQ);
-            if (mensajeRS != null) {
-                IngresoFacturaRS ingresoFacturaRS = (IngresoFacturaRS) mensajeRS.getCuerpo();
-                return ingresoFacturaRS.getResultado();
+        if (monto != null && tipo != null) {
+            if (tipo.equals("RE")) {
+                RetiroRQ retiroRQ = new RetiroRQ();
+                AppClient appClient = new AppClient();
+                retiroRQ.setDocumentoCliente(cedula);
+                retiroRQ.setNumeroCuenta(cuenta);
+                retiroRQ.setTipoCuenta(tipo);
+                retiroRQ.setValorRetiro(monto);
+                SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+                retiroRQ.setFechaRetiro(sdf.format(fecha));
+                MensajeRQ mensajeRQ = new MensajeRQ(NetUtil.getLocalIPAddress(), Mensaje.ID_MENSAJE_REGISTROMOVIMIENTO);
+                mensajeRQ.setCuerpo(retiroRQ);
+                MensajeRS mensajeRS = appClient.sendRequest(mensajeRQ);
+                if (mensajeRS != null) {
+                    RetiroRS retiroRS = (RetiroRS) mensajeRS.getCuerpo();
+                    return retiroRS.getResultado();
+                }
+                
+            } else {
+                DepositoRQ depositoRQ = new DepositoRQ();
+                AppClient appClient = new AppClient();
+                depositoRQ.setDocumentoCliente(cedula);
+                depositoRQ.setNumeroCuenta(cuenta);
+                depositoRQ.setTipoCuenta(tipo);
+                depositoRQ.setValorDeposito(monto);
+                SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+                depositoRQ.setFechaDeposito(sdf.format(fecha));
+                MensajeRQ mensajeRQ = new MensajeRQ(NetUtil.getLocalIPAddress(), Mensaje.ID_MENSAJE_REGISTROMOVIMIENTO);
+                mensajeRQ.setCuerpo(depositoRQ);
+                MensajeRS mensajeRS = appClient.sendRequest(mensajeRQ);
+                if (mensajeRS != null) {
+                    DepositoRS depositoRS = (DepositoRS) mensajeRS.getCuerpo();
+                    return depositoRS.getResultado();
+                }
+
             }
-            return BAD_RESPONSE;
+            return OK_RESPONSE;
         } else {
             return NULL_PARAMETERS;
         }
 
-    }
-    
-    public static Factura buscarFactura(String datos) {
-        if (datos != null && datos.length() == 10) {
-            AppClient appClient = new AppClient();
-            ConsultaFacturaRQ cliRQ = new ConsultaFacturaRQ();
-            cliRQ.setIdFactura(datos);
-
-            MensajeRQ mensajeRQ = new MensajeRQ("ale", Mensaje.ID_MENSAJE_CONSULTAFACTURA);
-            mensajeRQ.setCuerpo(cliRQ);
-            MensajeRS mensajeRS = appClient.sendRequest(mensajeRQ);
-            ConsultaFacturaRS cliRS = (ConsultaFacturaRS) mensajeRS.getCuerpo();
-            if (cliRS.getResultado().equals("1")) {
-                System.out.println("" + cliRS.getFactura());
-                return cliRS.getFactura();
-            }
-
-        }
-        return null;
     }
 
 }

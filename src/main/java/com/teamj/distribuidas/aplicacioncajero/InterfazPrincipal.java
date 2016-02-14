@@ -5,6 +5,8 @@
  */
 package com.teamj.distribuidas.aplicacioncajero;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,8 +19,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form BuscarProducto
      */
-    private Empleado emple;
-    
+    //private Empleado emple;
+
     public InterfazPrincipal() {
         initComponents();
     }
@@ -126,28 +128,75 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void BtnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnbuscarActionPerformed
         // TODO add your handling code here:
-        if(model.getRowCount()>0){
-        model.removeRow(0);
+        if (model.getRowCount() > 0) {
+            model.removeRow(0);
         }
         String buscar;// valor fijo: 10 ejemplo:0000000019
-        
-        buscar=txtdatos.getText();
-        if(buscar!=null){
-            try{
-           Cuenta cuenta=new Cuenta();
-           //cliente= Communication.buscarcliente(buscar);
-           System.out.print(cuenta);
-           model.addRow(new String[]{cuenta.getIdentificacion(),cuenta.getNombre(),cuenta.getTelefono(),cuenta.getDireccion()});
-            }catch(Exception e){
-              JOptionPane.showMessageDialog(null, "No Se encuentra Cliente");  
+
+        buscar = txtdatos.getText();
+        if (buscar != null) {
+            try {
+                Cuenta cuenta = new Cuenta();
+                cuenta = Communication.buscarCuenta(buscar);
+                System.out.print(cuenta);
+                model.addRow(new String[]{cuenta.getCodigoCuenta(), cuenta.getTipo(), cuenta.getSaldo()});
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No Se encuentra Cliente");
             }
-    } 
+        }
     }//GEN-LAST:event_BtnbuscarActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
         // TODO add your handling code here:
-            DetalleCuenta b = new DetalleCuenta();
-            b.show();
+//        jTable1.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                int fila = jTable1.rowAtPoint(e.getPoint());
+//                int columna = jTable1.columnAtPoint(e.getPoint());
+//                if ((fila > -1) && (columna > -1)) {
+//                    System.out.println(model.getValueAt(fila, columna));
+//                }
+//            }
+//        });
+        // tabla1 :es el nombre de tu tabla 
+        DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
+
+        //aca capturo el primer dato de la celda seleccionada 
+        String dato = String.valueOf(tm.getValueAt(jTable1.getSelectedRow(), 0));
+        DetalleCuenta b = new DetalleCuenta();
+
+        String buscar;// valor fijo: 10 ejemplo:0000000019
+        buscar = txtdatos.getText();
+        if (dato != null) {
+            try {
+                Cuenta cuenta = new Cuenta();
+                cuenta = Communication.buscarCuenta(dato);
+                System.out.print(cuenta);
+                b.lblCuenta.setText(cuenta.getCodigoCuenta());
+                b.lblTipo.setText(cuenta.getTipo());
+                b.lblSaldo.setText(cuenta.getSaldo());
+                Movimiento movimiento = new Movimiento();
+                movimiento = Communication.buscarMovimiento(dato);
+                System.out.print(movimiento);
+                b.model.addRow(new String[]{movimiento.getCodigoMovimiento(), movimiento.getTipo(), movimiento.getFecha(),movimiento.getMonto(),movimiento.getSaldo()});
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No Se encuentra Cuenta");
+            }
+        }
+        if (buscar != null) {
+            try {
+                Cliente cliente = new Cliente();
+                cliente = Communication.buscarCliente(buscar);
+                System.out.print(cliente);
+                b.lblCedula.setText(cliente.getCodigoCliente());
+                b.lblCliente.setText(cliente.getNombre());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No Se encuentra Cliente");
+            }
+        }
+
+        b.show();
     }//GEN-LAST:event_btnsalirActionPerformed
 
     /**
@@ -186,9 +235,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 new InterfazPrincipal().setVisible(true);
             }
         });
-        
+
     }
-    
+
     DefaultTableModel model = new DefaultTableModel(new String[]{"Numero Cuenta", "Tipo", "Saldo"}, 0);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
