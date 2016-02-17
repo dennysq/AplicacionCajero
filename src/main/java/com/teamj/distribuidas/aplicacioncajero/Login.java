@@ -27,7 +27,7 @@ public class Login extends javax.swing.JFrame {
     }
     public static String usu;
     public static String pass;
-//    private Empleado emple;
+    private Empleado emple;
    // public static Empresa empre;
 
     /**
@@ -128,18 +128,18 @@ public class Login extends javax.swing.JFrame {
         password = txtPassword.getText();
 
         if (usuario != null && password != null) {
-//            Empleado emp = Communication.loginEmpleado(usuario, password);
-//            if (emp != null) {
-//                emple = new Empleado();
-//                emple = emp;
-//                JOptionPane.showMessageDialog(null, "Usuario Correcto");
-//
-//                InterfazPrincipal m=new InterfazPrincipal(emple);
-//                m.show();
-//                this.dispose();
-//            } else {
-//                JOptionPane.showMessageDialog(null, "El Usuario es incorrecto");
-//            }
+            Empleado emp = Communication.retrieveEmpleado(usuario, password);
+            if (emp != null) {
+                emple = new Empleado();
+                emple = emp;
+                JOptionPane.showMessageDialog(null, "Usuario Correcto");
+
+                InterfazPrincipal m=new InterfazPrincipal(emple);
+                m.show();
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "El Usuario es incorrecto");
+            }
         }
 
         // TODO add your handling code here:

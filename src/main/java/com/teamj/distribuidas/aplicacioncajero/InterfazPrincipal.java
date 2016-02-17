@@ -135,14 +135,14 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         buscar = txtdatos.getText();
         if (buscar != null) {
-//            try {
-//                Cuenta cuenta = new Cuenta();
-//                cuenta = Communication.buscarCuenta(buscar);
-//                System.out.print(cuenta);
-//                model.addRow(new String[]{cuenta.getCodigoCuenta(), cuenta.getTipo(), cuenta.getSaldo()});
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(null, "No Se encuentra Cliente");
-//            }
+            try {
+                Cuenta cuenta = new Cuenta();
+                cuenta = Communication.buscarCuenta(buscar);
+                System.out.print(cuenta);
+                model.addRow(new String[]{cuenta.getCodigoCuenta(), cuenta.getTipo(), cuenta.getSaldo()});
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No Se encuentra Cliente");
+            }
         }
     }//GEN-LAST:event_BtnbuscarActionPerformed
 
@@ -168,32 +168,32 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         String buscar;// valor fijo: 10 ejemplo:0000000019
         buscar = txtdatos.getText();
         if (dato != null) {
-//            try {
-//                Cuenta cuenta = new Cuenta();
-//                cuenta = Communication.buscarCuenta(dato);
-//                System.out.print(cuenta);
-//                b.lblCuenta.setText(cuenta.getCodigoCuenta());
-//                b.lblTipo.setText(cuenta.getTipo());
-//                b.lblSaldo.setText(cuenta.getSaldo());
-//                Movimiento movimiento = new Movimiento();
-//                movimiento = Communication.buscarMovimiento(dato);
-//                System.out.print(movimiento);
-//                b.model.addRow(new String[]{movimiento.getCodigoMovimiento(), movimiento.getTipo(), movimiento.getFecha(),movimiento.getMonto(),movimiento.getSaldo()});
-//
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(null, "No Se encuentra Cuenta");
-//            }
+            try {
+                Cuenta cuenta = new Cuenta();
+                cuenta = Communication.buscarCuenta(dato);
+                System.out.print(cuenta);
+                b.lblCuenta.setText(cuenta.getCodigoCuenta());
+                b.lblTipo.setText(cuenta.getTipo());
+                b.lblSaldo.setText(cuenta.getSaldo());
+                Movimiento movimiento = new Movimiento();
+                movimiento = Communication.buscarMovimiento(dato);
+                System.out.print(movimiento);
+                b.model.addRow(new String[]{movimiento.getCodigoMovimiento(), movimiento.getTipo(), movimiento.getFecha(),movimiento.getMonto(),movimiento.getSaldo()});
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No Se encuentra Cuenta");
+            }
         }
         if (buscar != null) {
-//            try {
-//                Cliente cliente = new Cliente();
-//                cliente = Communication.buscarCliente(buscar);
-//                System.out.print(cliente);
-//                b.lblCedula.setText(cliente.getCodigoCliente());
-//                b.lblCliente.setText(cliente.getNombre());
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(null, "No Se encuentra Cliente");
-//            }
+            try {
+                Cliente cliente = new Cliente();
+                cliente = Communication.buscarCliente(buscar);
+                System.out.print(cliente);
+                b.lblCedula.setText(cliente.getCodigoCliente());
+                b.lblCliente.setText(cliente.getNombre());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No Se encuentra Cliente");
+            }
         }
 
         b.show();

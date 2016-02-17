@@ -157,9 +157,9 @@ public class RealizarRegistro extends javax.swing.JFrame {
         
         if (!txtMonto.getText().isEmpty()) {
         DetalleCuenta b = new DetalleCuenta();    
-//        Movimiento movimiento = new Movimiento();
-//        movimiento = Communication.registrarMovimeinto(b.lblCedula.getText(), b.lblCuenta.getText(), txtMonto.getText(), tipo, new Date());
-//        System.out.print(movimiento);
+        Movimiento movimiento = new Movimiento();
+        movimiento = Communication.registrarMovimeinto(b.lblCedula.getText(), b.lblCuenta.getText(), txtMonto.getText(), tipo, new Date());
+        System.out.print(movimiento);
         JOptionPane.showMessageDialog(null, "Transaccion realizada");
         //DefaultTableModel modelo = (DefaultTableModel) tblpro.getModel();
         //producto = new Producto("20", "7", "88888", "hkjhk");

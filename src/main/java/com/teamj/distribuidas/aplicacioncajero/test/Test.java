@@ -5,15 +5,10 @@
  */
 package com.teamj.distribuidas.aplicacioncajero.test;
 
-import com.teamj.distribuidas.aplicacioncajero.Communication;
-
 /**
  *
  * @author Dennys
  */
 public class Test {
-    public static void main(String[] args) {
-        System.out.println(""+ Communication.loginEmpleado("", password));
-    }
-  
+    
 }
