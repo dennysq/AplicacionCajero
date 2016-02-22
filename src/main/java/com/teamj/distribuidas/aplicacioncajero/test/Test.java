@@ -5,7 +5,7 @@
  */
 package com.teamj.distribuidas.aplicacioncajero.test;
 
-import com.teamj.distribuidas.aplicacioncajero.Communication;
+
 
 /**
  *
@@ -13,7 +13,7 @@ import com.teamj.distribuidas.aplicacioncajero.Communication;
  */
 public class Test {
     public static void main(String[] args) {
-        System.out.println(""+ Communication.loginEmpleado("", password));
+        //System.out.println(""+ Communication.loginEmpleado("", password));
     }
   
 }
