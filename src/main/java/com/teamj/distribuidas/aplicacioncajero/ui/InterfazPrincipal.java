@@ -128,7 +128,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jLabel12.setText("NUMERO DE CUENTA:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AHORRO", "CORRIENTE", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AHORRO", "CORRIENTE" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -237,6 +237,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         if(jComboBox1.getSelectedItem()=="AHORRO")
         {
           tipoM="AH";   
+          
         }else
         {
           tipoM="CO"; 
@@ -246,13 +247,13 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         if (buscar != null) {
             try {
                 Cuenta cuenta = new Cuenta();
-                cuenta = Communication.buscarCuenta(buscar,tipoM);
+                cuenta = Communication.buscarCuenta(buscar, tipoM);
                 System.out.print(cuenta);
                  lblSaldo.setText(cuenta.getSaldo().toString());
                  lblCliente.setText(cuenta.getCliente().getNombre());
                  lblCedula.setText(cuenta.getCliente().getIdentificacion());
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "No Se encuentra numero de cuenta");
+                JOptionPane.showMessageDialog(null, "No se encuentra numero de cuenta");
             }
         }
     }//GEN-LAST:event_BtnbuscarActionPerformed

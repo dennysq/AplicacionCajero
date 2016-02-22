@@ -22,7 +22,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         txtUsuario.addKeyListener(new ValidacionTecladoLenght(15));
-        txtUsuario.addKeyListener(new ValidacionTecladoNum());
+  
         
     }
     public static String usu;
@@ -52,7 +52,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setText("INICIAR SESION");
 
-        jLabel2.setText("RUC:");
+        jLabel2.setText("User:");
 
         jLabel3.setText("Password:");
 
@@ -128,18 +128,17 @@ public class Login extends javax.swing.JFrame {
         password = txtPassword.getText();
 
         if (usuario != null && password != null) {
-//            Empleado emp = Communication.loginEmpleado(usuario, password);
-//            if (emp != null) {
-//                emple = new Empleado();
-//                emple = emp;
-//                JOptionPane.showMessageDialog(null, "Usuario Correcto");
-//
-//                InterfazPrincipal m=new InterfazPrincipal(emple);
-//                m.show();
-//                this.dispose();
-//            } else {
-//                JOptionPane.showMessageDialog(null, "El Usuario es incorrecto");
-//            }
+            Boolean emp=Communication.loginEmpleado(usuario, password);
+            if (emp==true) {
+             
+                JOptionPane.showMessageDialog(null, "Usuario Correcto");
+
+                InterfazPrincipal m=new InterfazPrincipal();
+                m.show();
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "El Usuario es incorrecto");
+            }
         }
 
         // TODO add your handling code here:

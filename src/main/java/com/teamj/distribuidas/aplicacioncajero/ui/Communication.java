@@ -86,7 +86,7 @@ public class Communication {
     }
 
     public static Cuenta buscarCuenta(String datos,String tipo) {
-        if (datos != null && datos.length() == 10) {
+        if (datos != null) {
             AppClient appClient = new AppClient();
             appClient.setIp("192.168.1.115");
             CuentaRQ cueRQ = new CuentaRQ();
@@ -117,7 +117,7 @@ public class Communication {
                 retiroRQ.setTipoCuenta(tipo);
                 retiroRQ.setValorRetiro(monto);
                 SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmmss");
-                retiroRQ.setFechaDeposito(sdf.format(new Date()));
+                retiroRQ.setFechaRetiro(sdf.format(new Date()));
                 MensajeRQ mensajeRQ = new MensajeRQ(NetUtil.getLocalIPAddress(), Mensaje.ID_MENSAJE_RETIRO);
                 mensajeRQ.setCuerpo(retiroRQ);
                 MensajeRS mensajeRS = appClient.sendRequest(mensajeRQ);
