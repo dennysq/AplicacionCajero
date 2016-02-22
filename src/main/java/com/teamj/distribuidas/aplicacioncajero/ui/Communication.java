@@ -105,16 +105,16 @@ public class Communication {
         return null;
     }
 
-    public static String registrarMovimeinto(String cuenta, String monto, String tipo) {
+    public static String registrarMovimeinto(String cedula, String cuenta, String monto, String tipo, String tipoC) {
 
         if (monto != null && tipo != null) {
             if (tipo.equals("RE")) {
                 RetiroRQ retiroRQ = new RetiroRQ();
                 AppClient appClient = new AppClient();
                 appClient.setIp("192.168.1.115");
-                //retiroRQ.setDocumentoCliente(cedula);
+                retiroRQ.setDocumentoCliente(cedula);
                 retiroRQ.setNumeroCuenta(cuenta);
-                retiroRQ.setTipoCuenta(tipo);
+                retiroRQ.setTipoCuenta(tipoC);
                 retiroRQ.setValorRetiro(monto);
                 SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmmss");
                 retiroRQ.setFechaRetiro(sdf.format(new Date()));
@@ -130,9 +130,9 @@ public class Communication {
                 DepositoRQ depositoRQ = new DepositoRQ();
                 AppClient appClient = new AppClient();
                 appClient.setIp("192.168.1.115");
-                //depositoRQ.setDocumentoCliente(cedula);
+                depositoRQ.setDocumentoCliente(cedula);
                 depositoRQ.setNumeroCuenta(cuenta);
-                depositoRQ.setTipoCuenta(tipo);
+                depositoRQ.setTipoCuenta(tipoC);
                 depositoRQ.setValorDeposito(monto);
                 SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmmss");
                 depositoRQ.setFechaDeposito(sdf.format(new Date()));

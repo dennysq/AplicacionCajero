@@ -21,7 +21,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
      * Creates new form BuscarProducto
      */
     //private Empleado emple;
-
     public InterfazPrincipal() {
         initComponents();
         lblCliente.setText(" ");
@@ -236,24 +235,21 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         String buscar;// valor fijo: 10 ejemplo:0000000019
         String tipoM;
         buscar = txtdatos.getText();
-        if(jComboBox1.getSelectedItem()=="AHORRO")
-        {
-          tipoM="AH";   
-          
-        }else
-        {
-          tipoM="CO"; 
+        if (jComboBox1.getSelectedItem() == "AHORRO") {
+            tipoM = "AH";
+
+        } else {
+            tipoM = "CO";
         }
-              
-       
+
         if (buscar != null) {
             try {
                 Cuenta cuenta = new Cuenta();
                 cuenta = Communication.buscarCuenta(buscar, tipoM);
                 System.out.print(cuenta);
-                 lblSaldo.setText(cuenta.getSaldo().toString());
-                 lblCliente.setText(cuenta.getCliente().getNombre());
-                 lblCedula.setText(cuenta.getCliente().getIdentificacion());
+                lblSaldo.setText(cuenta.getSaldo().toString());
+                lblCliente.setText(cuenta.getCliente().getNombre());
+                lblCedula.setText(cuenta.getCliente().getIdentificacion());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "No se encuentra numero de cuenta");
             }
@@ -281,26 +277,39 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String tipo;
-        if(jRadioButton1.isSelected())
-        {
-            tipo="DE";
-        } else
-        {
-            tipo="RE";
+        String tipoC;
+        if (jRadioButton1.isSelected()) {
+            tipo = "DE";
+
+        } else {
+            tipo = "RE";
         }
-        
-        double monto= new Double(txtMonto.getText());
-        double saldo= new Double(lblSaldo.getText());
-       
-        if(monto>saldo && tipo.equals("RE"))
-        {
+        if (jComboBox1.getSelectedItem() == "AHORRO") {
+            tipoC = "AH";
+
+        } else {
+            tipoC = "CO";
+        }
+        double monto = new Double(txtMonto.getText());
+        double saldo = new Double(lblSaldo.getText());
+
+        if (monto > saldo && tipo.equals("RE")) {
             JOptionPane.showMessageDialog(null, "El monto del retiro no puede superar el valor del saldo actual");
-            
+
         } else if (!txtMonto.getText().isEmpty()) {
-            
-            Communication.registrarMovimeinto(txtdatos.getText(), txtMonto.getText(), tipo);
+
+            Communication.registrarMovimeinto(lblCedula.getText(), txtdatos.getText(), txtMonto.getText(), tipo, tipoC);
             //System.out.print(movimiento);
+
             JOptionPane.showMessageDialog(null, "Transaccion realizada");
+            if (tipo.equals("RE")) {
+                saldo = saldo - monto;   
+                lblSaldo.setText(String.valueOf(saldo));
+            }
+            else{
+                saldo = saldo + monto;
+                lblSaldo.setText(String.valueOf(saldo));
+            }
 
         } else {
             JOptionPane.showMessageDialog(null, "Ingrese la cantidad primero");
