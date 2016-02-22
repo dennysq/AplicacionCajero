@@ -24,6 +24,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     public InterfazPrincipal() {
         initComponents();
+        lblCliente.setText(" ");
+        lblSaldo.setText(" ");
+        lblCedula.setText(" ");
     }
 
     /**
@@ -81,7 +84,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jLabel8.setText("DETALLES CUENTA");
 
-        txtMonto.setText("jTextField1");
         txtMonto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMontoActionPerformed(evt);
@@ -148,10 +150,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                                         .addComponent(jLabel3)
                                         .addComponent(jLabel9)))
                                 .addGap(44, 44, 44)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jRadioButton2)
-                                    .addComponent(jRadioButton1)
-                                    .addComponent(txtMonto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtMonto, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addGap(21, 21, 21)
                         .addComponent(jButton1))
                     .addComponent(jLabel1)

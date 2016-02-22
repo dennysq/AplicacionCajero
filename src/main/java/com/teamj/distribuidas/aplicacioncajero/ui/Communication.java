@@ -97,7 +97,7 @@ public class Communication {
             mensajeRQ.setCuerpo(cueRQ);
             MensajeRS mensajeRS = appClient.sendRequest(mensajeRQ);
             CuentaRS cueRS = (CuentaRS) mensajeRS.getCuerpo();
-            if (cueRS.getCuenta().equals("OK")) {
+            if (cueRS.getMessage().equals("OK")) {
                 System.out.println("" + cueRS.getCuenta());
                 return cueRS.getCuenta();
             }
